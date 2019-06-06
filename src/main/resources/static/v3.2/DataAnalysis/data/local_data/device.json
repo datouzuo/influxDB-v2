@@ -1,0 +1,1122 @@
+[
+  {
+    "id": 1,
+    "factory": "厂区A",
+    "time": "2019-04-01",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 2,
+    "factory": "厂区A",
+    "time": "2019-04-02",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 3,
+    "factory": "厂区A",
+    "time": "2019-04-03",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 4,
+    "factory": "厂区A",
+    "time": "2019-04-04",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 5,
+    "factory": "厂区A",
+    "time": "2019-04-05",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 6,
+    "factory": "厂区A",
+    "time": "2019-04-06",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 7,
+    "factory": "厂区A",
+    "time": "2019-04-07",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 8,
+    "factory": "厂区B",
+    "time": "2019-04-01",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 9,
+    "factory": "厂区B",
+    "time": "2019-04-02",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 10,
+    "factory": "厂区B",
+    "time": "2019-04-03",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 11,
+    "factory": "厂区B",
+    "time": "2019-04-04",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 12,
+    "factory": "厂区B",
+    "time": "2019-04-05",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 13,
+    "factory": "厂区B",
+    "time": "2019-04-06",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 14,
+    "factory": "厂区B",
+    "time": "2019-04-07",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 15,
+    "factory": "厂区C",
+    "time": "2019-04-01",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 16,
+    "factory": "厂区C",
+    "time": "2019-04-02",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 17,
+    "factory": "厂区C",
+    "time": "2019-04-03",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 18,
+    "factory": "厂区C",
+    "time": "2019-04-04",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 19,
+    "factory": "厂区C",
+    "time": "2019-04-05",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 20,
+    "factory": "厂区C",
+    "time": "2019-04-06",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 21,
+    "factory": "厂区C",
+    "time": "2019-04-07",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 22,
+    "factory": "厂区D",
+    "time": "2019-04-01",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 23,
+    "factory": "厂区D",
+    "time": "2019-04-02",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 24,
+    "factory": "厂区D",
+    "time": "2019-04-03",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 25,
+    "factory": "厂区D",
+    "time": "2019-04-04",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 26,
+    "factory": "厂区D",
+    "time": "2019-04-05",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 27,
+    "factory": "厂区D",
+    "time": "2019-04-06",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 28,
+    "factory": "厂区D",
+    "time": "2019-04-07",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 29,
+    "factory": "厂区E",
+    "time": "2019-04-01",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 30,
+    "factory": "厂区E",
+    "time": "2019-04-02",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+},
+  {
+    "id": 31,
+    "factory": "厂区E",
+    "time": "2019-04-03",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 32,
+    "factory": "厂区E",
+    "time": "2019-04-04",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 33,
+    "factory": "厂区E",
+    "time": "2019-04-05",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 34,
+    "factory": "厂区E",
+    "time": "2019-04-06",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  },
+  {
+    "id": 35,
+    "factory": "厂区E",
+    "time": "2019-04-07",
+    "device_info":[
+        {
+          "device_name": "灯",
+          "total_number": 100,
+          "error_number": 4
+        },
+        {
+          "device_name": "空调",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "摄像头",
+          "total_number": 122,
+          "error_number": 6
+        },
+        {
+          "device_name": "风机",
+          "total_number": 20,
+          "error_number": 7
+        },
+        {
+          "device_name": "门禁",
+          "total_number": 125,
+          "error_number": 5
+        }
+    ]
+  }
+]

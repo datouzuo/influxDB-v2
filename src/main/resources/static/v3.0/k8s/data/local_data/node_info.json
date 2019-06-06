@@ -1,0 +1,25 @@
+[{
+	"node_Name": "k8s-node1",
+	"ready": true,
+	"cPU_request_rate": 0.1145,
+	"cPU_count": 24000.0,
+	"memory_used": 1451.8818,
+	"memory_num": 48136.1719,
+	"created_time": 5.9737
+}, {
+	"node_Name": "k8s-node2",
+	"ready": true,
+	"cPU_request_rate": 0.1038,
+	"cPU_count": 24000.0,
+	"memory_used": 1169.3003,
+	"memory_num": 48136.1719,
+	"created_time": 5.9737
+}, {
+	"node_Name": "k8s-master",
+	"ready": true,
+	"cPU_request_rate": 0.3291,
+	"cPU_count": 24000.0,
+	"memory_used": 2169.4052,
+	"memory_num": 48136.1719,
+	"created_time": 5.9737
+}]

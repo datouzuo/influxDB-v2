@@ -1,0 +1,44 @@
+/*
+节点信息
+*/
+[
+	{
+		"Node_Name": "k8s-node2",
+		"Ready": "True",
+		"CPU_request_value": 0.25,
+        "CPU_request_rate": 1.04,
+		"CPU_limit_value": 0,
+        "CPU_limit_rate": 0,
+		"Memory_request_value": 0,
+        "Memory_request_rate": 0,
+		"Memory_limit_value": 0,
+        "Memory_limit_rate": 0,
+        "Created_time": 23
+	},
+	{
+		"Node_Name": "k8s-node1",
+		"Ready": "True",
+		"CPU_request_value": 0.25,
+        "CPU_request_rate": 1.04,
+		"CPU_limit_value": 0,
+        "CPU_limit_rate": 0,
+		"Memory_request_value": 0,
+        "Memory_request_rate": 0,
+		"Memory_limit_value": 0,
+        "Memory_limit_rate": 0,
+        "Created_time": 23
+	},
+    {
+		"Node_Name": "k8s-master",
+		"Ready": "True",
+		"CPU_request_value": 1.00,
+        "CPU_request_rate": 4.17,
+		"CPU_limit_value": 0,
+        "CPU_limit_rate": 0,
+		"Memory_request_value": 340,
+        "Memory_request_rate": 0.71,
+		"Memory_limit_value": 140,
+        "Memory_limit_rate": 0.29,
+        "Created_time": 23
+	}
+]

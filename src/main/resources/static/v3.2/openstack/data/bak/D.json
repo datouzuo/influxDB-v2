@@ -1,0 +1,14 @@
+[{
+	"Instance": {
+		"Instance_Used": 17,
+		"Instance_Total": 1998
+	},
+	"VCPU": {
+		"VCPU_Used": 132,
+		"VCPU_Total": 1998
+	},
+	"Memory": {
+		"Memory_Used": 272424,
+		"Memory_Total": 1998
+	}
+}]

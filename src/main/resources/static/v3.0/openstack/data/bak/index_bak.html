@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>丝路云监控服务平台</title>
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+	</head>
+	
+	<body>
+		<header id="header">
+			<h3 class="header-title">丝路云监控服务平台</h3>
+			<div class="header-info header-info-l">数据来源：概要 &amp; 网络拓扑</div>
+			<div class="header-info header-info-r">数据日期：<span id="nowDate"></span></div>
+		</header>
+		
+		<footer id="footer"></footer>
+		
+		<div id="container">
+			<div id="flexCon">
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-l">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">使用量</h3>
+							<table class="data-s">
+								<tr bgcolor="#0086B6">
+									<td>实例名称</td>
+									<td>VCPU数量</td>
+									<td>磁盘</td>
+									<td>内存</td>
+									<td>创建后的时间</td>
+								</tr>
+								<tr>
+									<td>k8s-master</td>
+									<td>24</td>
+									<td>300GB</td>
+									<td>48GB</td>
+									<td>3 weeks,6 days</td>
+								</tr>
+								<tr>
+									<td>Win10me</td>
+									<td>4</td>
+									<td>100GB</td>
+									<td>8GB</td>
+									<td>1 month,1 week</td>
+								</tr>
+								<tr>
+									<td>k8s-node1</td>
+									<td>24</td>
+									<td>300GB</td>
+									<td>48GB</td>
+									<td>3 weeks,5 days</td>
+								</tr>
+								<tr>
+									<td>manager</td>
+									<td>4</td>
+									<td>100GB</td>
+									<td>8GB</td>
+									<td>4 days,17 hours</td>
+								</tr>
+								<tr>
+									<td>zaq</td>
+									<td>2</td>
+									<td>50GB</td>
+									<td>4GB</td>
+									<td>1 week,3 days</td>
+								</tr>
+								<tr>
+									<td>k8s-node2</td>
+									<td>24</td>
+									<td>300GB</td>
+									<td>48GB</td>
+									<td>1 week,3 days</td>
+								</tr>
+								<tr>
+									<td>qaz</td>
+									<td>2</td>
+									<td>50GB</td>
+									<td>4GB</td>
+									<td>1 week,3 days</td>
+								</tr>
+								<tr>
+									<td>LaborWeb</td>
+									<td>4</td>
+									<td>200GB</td>
+									<td>8GB</td>
+									<td>1 week,5 days</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-c" style="padding-right:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用情况概要</h3>
+							<div class="chart-div chart-done">
+								<table class="data-t">
+									<tr>
+										<th><img src="img/icon-01.png" /></th>
+										<td>
+											<p><span id="listRunningInstance">0</span></p>
+											<p>运行中的实例</p>
+										</td>
+										<th><img src="img/icon-02.png" /></th>
+										<td>
+											<p><span id="listEnabledMemory">0</span></p>
+											<p>已启用内存(GB)</p>
+										</td>
+									</tr>
+									<tr>
+										<th><img src="img/icon-05.png" /></th>
+										<td>
+											<p><span id="listRAMFree">0</span></p>
+											<p>内存空闲量</p>
+										</td>
+										<th><img src="img/icon-03.png" /></th>
+										<td>
+											<p><span id="listDiskUsed">0</span></p>
+											<p>磁盘使用量</p>
+										</td>
+									</tr>
+									<tr>
+										<th><img src="img/icon-05.png" /></th>
+										<td>
+											<p><span id="listDiskFree">0</span></p>
+											<p>磁盘空闲量</p>
+										</td>
+										<th><img src="img/icon-04.png" /></th>
+										<td>
+											<p><span id="listDiskAvailable">0</span></p>
+											<p>磁盘可用量</p>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-r" style="padding-left:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待添加</h3>
+							<div class="chart-div" id="mapChart">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-l" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">上限摘要</h3>
+
+							<div class="chart-div" id="pieChart1">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-l" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title"></h3>
+
+							<div class="chart-div" id="pieChart2">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-l" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title"></h3>
+
+							<div class="chart-div" id="pieChart3">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-r" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">网络拓扑</h3>
+							<div class="chart-div" id="relationChart">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--外部引用-->
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/countUp.min.js"></script>
+		<script type="text/javascript" src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="js/echarts-map-china.js"></script>
+		<script type="text/javascript" src="js/echarts-theme-shine.js"></script>
+
+		<!--内部业务逻辑-->
+		<script type="text/javascript">
+			$(function() {
+				/*************** 获取当天信息**************/
+				(function() {
+					const now = new Date();
+					const year = now.getFullYear();
+					const month = now.getMonth()+1;
+					const day = now.getDate();
+					$("#nowDate").html(year+"年"+month+"月"+day+"日");
+				})();
+				
+				/*************** 使用情况概要 **************/
+				// $.ajax({
+				// 	url: "data/count-data.json",
+				// 	dataType: "json"
+				// }).done(function(data) {
+				// 	//console.log('Data: ', data);
+				// 	rollNum("listedCompany", 0, data.listed_companies_total);
+				// 	rollNum("listedSecurity", 0, data.listed_securities_total);
+				// 	rollNum("totalMarket", 0, data.total_market_value, 2);
+				// 	rollNum("circulationMarket", 0, data.circulation_market_value, 2);
+				// 	rollNum("shRatio", 0, data.sh_pe_ratio, 2);
+				// 	rollNum("szRatio", 0, data.sz_pe_ratio, 2);
+				// }).fail(function(jqXHR, textStatus) {
+				// 	console.log("Ajax Error: ", textStatus);
+				// });
+
+				$.ajax({
+					url: "data/B.json",
+					dataType: "json"
+				}).done(function(data) {
+					//console.log('Data: ', data);
+					rollNum("listRunningInstance", 0, data.Running_Instance);
+					rollNum("listEnabledMemory", 0, data.Enabled_Memory);
+					rollNum("listDiskUsed", 0, data.Disk_Used, 2);
+					rollNum("listDiskAvailable", 0, data.Disk_Available, 2);
+					rollNum("listDiskFree", 0, data.Disk_Free, 2);
+					rollNum("listRAMFree", 0, data.RAM_Free, 2);
+				}).fail(function(jqXHR, textStatus) {
+					console.log("Ajax Error: ", textStatus);
+				});
+
+				/*************** 待添加 **************/
+				const mapChart = echarts.init(document.getElementById("mapChart"), "shine");
+				const mapChartOpt = {
+					tooltip : {
+						formatter: "{a} <br/>{b} : {c}%"
+					},
+					toolbox: {
+						feature: {
+							restore: {},
+							saveAsImage: {}
+						}
+					},
+					series: [
+						{
+							name: '业务指标',
+							type: 'gauge',
+							detail: {formatter:'{value}%'},
+							data: [{value: 1, name: '完成率'}]
+						}
+					]
+				};
+
+				setInterval(function () {
+					mapChartOpt.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+					mapChart.setOption(mapChartOpt, true);
+				},2000);
+				// mapChart.setOption(mapChartOpt);
+
+				/*************** 上限摘要数据 **************/
+				const pieChart1 = echarts.init(document.getElementById("pieChart1"), "shine");
+				const pieChart1Opt = {
+				    title:{
+				        text:'计算',
+						textStyle:{
+							color:'#FFFFFF',
+							fontSize:16
+						},
+						top:'260px',
+						left:'20px'
+					},
+					angleAxis: {
+						type: 'category',
+						data: ['实例', 'VCPU数量', '内存'],
+						axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					radiusAxis: {
+					},
+					polar: {
+					},
+					series: [{
+						type: 'bar',
+						data: [8/50, 0, 0],
+						coordinateSystem: 'polar',
+						name: '实例',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#EA9502"
+							}
+						}
+					}, {
+						type: 'bar',
+						data: [0, 88/100, 0],
+						coordinateSystem: 'polar',
+						name: 'VCPU数量',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#1A5E91"
+							}
+						}
+					}, {
+						type: 'bar',
+						data: [0, 0, 176/256],
+						coordinateSystem: 'polar',
+						name: '内存',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#C12E34"
+							}
+						}
+					}],
+					legend: {
+						show: true,
+						data: ['实例', 'VCPU数量', '内存'],
+        				textStyle:{color:"#B0C2F9"}
+					}
+				};
+				pieChart1.setOption(pieChart1Opt);
+				$.ajax({
+					url: "data/ranking-list.json",
+					dataType: "json"
+				}).done(function() {
+					$("#rankChart").addClass("chart-done");
+				}).done(function(data) {
+					//console.log('Data: ', data);
+					const xData = [];
+					const yData = [];
+					for(let i in data) {
+						xData.push(data[i].market_capitalization);
+						yData.push(data[i].stock_name);
+					}
+					rankChart.setOption({
+						yAxis: {
+							data: yData
+						},
+						series: [{
+							name: "市价总值排行",
+							data: xData
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				const pieChart2 = echarts.init(document.getElementById("pieChart2"), "shine");
+				const pieChart2Opt = {
+				    title:{
+				        text:'卷',
+						textStyle:{
+							color:'#FFFFFF',
+							fontSize:16
+						},
+						top:'260px',
+						left:'20px'
+					},
+					angleAxis: {
+						type: 'category',
+						data: ['卷', '卷快照', '卷存储'],
+						axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					radiusAxis: {
+					},
+					polar: {
+					},
+					series: [{
+						type: 'bar',
+						data: [1/10, 0, 0],
+						coordinateSystem: 'polar',
+						name: '卷',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#EA9502"
+							}
+						}
+					}, {
+						type: 'bar',
+						data: [0, 0/10, 0],
+						coordinateSystem: 'polar',
+						name: '卷快照',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#1A5E91"
+							}
+						}
+					}, {
+						type: 'bar',
+						data: [0, 0, 1/1000],
+						coordinateSystem: 'polar',
+						name: '卷存储',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#C12E34"
+							}
+						}
+					}],
+					legend: {
+						show: true,
+						data: ['卷', '卷快照', '卷存储'],
+        				textStyle:{color:"#B0C2F9"}
+					}
+				};
+				pieChart2.setOption(pieChart2Opt);
+
+				const pieChart3 = echarts.init(document.getElementById("pieChart3"), "shine");
+				const pieChart3Opt = {
+				    title:{
+				        text:'网络',
+						textStyle:{
+							color:'#FFFFFF',
+							fontSize:16
+						},
+						top:'260px',
+						left:'10px'
+					},
+					angleAxis: {
+						type: 'category',
+						data: ['浮动IP', '安全组', '安全组规则', '网络', '端口', '路由'],
+						axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					radiusAxis: {
+					},
+					polar: {
+					},
+					series: [{
+						type: 'bar',
+						data: [14/50, 0, 0, 0, 0, 0],
+						coordinateSystem: 'polar',
+						name: '浮动IP',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#FF6C87"
+							}
+						}
+					}, {
+						type: 'bar',
+						data: [0, 4/10, 0, 0, 0, 0],
+						coordinateSystem: 'polar',
+						name: '安全组',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#1A5E91"
+							}
+						}
+					}, {
+						type: 'bar',
+						data: [0, 0, 11/100, 0, 0, 0],
+						coordinateSystem: 'polar',
+						name: '安全组规则',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#C12E34"
+							}
+						}
+					}, {
+                        type: 'bar',
+                        data: [0, 0, 0, 3/100, 0, 0],
+                        coordinateSystem: 'polar',
+                        name: '网络',
+                        stack: 'a',
+                        itemStyle: {
+                            normal: {
+                                color: "#2B821D"
+                            }
+                        }
+                    }, {
+                        type: 'bar',
+                        data: [0, 0, 0, 0, 15/500, 0],
+                        coordinateSystem: 'polar',
+                        name: '端口',
+                        stack: 'a',
+                        itemStyle: {
+                            normal: {
+                                color: "#5E43B1"
+                            }
+                        }
+                    }, {
+                        type: 'bar',
+                        data: [0, 0, 0, 0, 0, 1/10],
+                        coordinateSystem: 'polar',
+                        name: '路由',
+                        stack: 'a',
+                        itemStyle: {
+                            normal: {
+                                color: "#FFB67F"
+                            }
+                        }
+                    }],
+					legend: {
+						show: true,
+						data: ['浮动IP', '安全组', '安全组规则', '网络', '端口', '路由'],
+        				textStyle:{color:"#B0C2F9"}
+					}
+				};
+				pieChart3.setOption(pieChart3Opt);
+
+				/*************** 网络拓扑 **************/
+				//初始化echarts实例
+				const relationChart = echarts.init(document.getElementById("relationChart"));
+				const relationOpt = {
+				    animationDurationUpdate: 1500,
+				    animationEasingUpdate: 'quinticInOut',
+				    label: {
+				        normal: {
+				            show: true,
+				            textStyle: {
+				                fontSize: 12
+				            }
+				        }
+				    },
+				    series: [{
+			            type: 'graph',
+			            symbolSize: 45,
+			            focusNodeAdjacency: true,
+			            roam: true,
+			            layout: 'force',
+			            force: {
+			                repulsion: 320 //斥力因子，值越大，斥力越大
+			            },
+			            label: {
+			                normal: {
+			                    show: true,
+			                    textStyle: {
+			                        fontSize: 12
+			                    },
+			                }
+			            },
+			            edgeSymbolSize: [4, 50],
+			            edgeLabel: {
+			                normal: {
+			                    show: true,
+			                    textStyle: {
+			                        fontSize: 10
+			                    },
+			                    formatter: "{c}"
+			                }
+			            },
+			            categories: [{
+			            	name: '云服务器',
+			            	itemStyle: {
+			            		normal: {
+			            			color: '#f2637b'
+			            		}
+			            	}
+			            }, {
+			                name: '路由1',
+			                itemStyle: {
+			                    normal: {
+			                        color: "#eaa674",
+			                    }
+			                }
+			            }, {
+			                name: '路由2',
+			                itemStyle: {
+			                    normal: {
+			                        color: "#3aa1ff",
+			                    }
+			                }
+			            }, {
+			                name: '路由3',
+			                itemStyle: {
+			                    normal: {
+			                        color: "#4ecb73",
+			                    }
+			                }
+			            }],
+			            data: [{
+			            	name: '云服务器',
+			            	category: 0,
+			            	draggable: true
+			            }, {
+			            	name: '路由1',
+			            	category: 1,
+			            	draggable: true
+			            }, {
+			            	name: '路由2',
+			            	category: 2,
+			            	draggable: true
+			            }, {
+			            	name: '路由3',
+			            	category: 3,
+			            	draggable: true
+			            }, {
+			                name: '终端A',
+			                category: 1,
+			                draggable: true,
+			            }, {
+			                name: '终端B',
+			                category: 1,
+			                draggable: true,
+			            }, {
+			                name: '终端C',
+			                category: 1,
+			                draggable: true,
+			            }, {
+			                name: '终端D',
+			                category: 1,
+			                draggable: true,
+			            }, {
+			                name: '终端E',
+			                category: 3,
+			                draggable: true,
+			            }, {
+			                name: '终端F',
+			                category: 3,
+			                draggable: true,
+			            }, {
+			                name: '终端G',
+			                category: 3,
+			                draggable: true,
+			            }, {
+			                name: '终端H',
+			                category: 2,
+			                draggable: true,
+			            }],
+			            links: [{
+			            	source: 0,
+			                target: 1,
+			                value: ''
+			            }, {
+			            	source: 0,
+			                target: 2,
+			                value: ''
+			            }, {
+			            	source: 0,
+			                target: 3,
+			                value: ''
+			            }, {
+			                source: 1,
+			                target: 4,
+			                value: ''
+			            }, {
+			            	source: 1,
+			                target: 5,
+			                value: ''
+			            }, {
+			            	source: 1,
+			                target: 6,
+			                value: ''
+			            }, {
+			            	source: 1,
+			                target: 7,
+			                value: ''
+			            }, {
+			                source: 6,
+			                target: 7,
+			                value: ''
+			            }, {
+			            	source: 3,
+			                target: 8,
+			                value: ''
+			            }, {
+			            	source: 3,
+			                target: 9,
+			                value: ''
+			            }, {
+			            	source: 3,
+			                target: 10,
+			                value: ''
+			            }, {
+			            	source: 9,
+			                target: 10,
+			                value: ''
+			            }, {
+			            	source: 2,
+			                target: 11,
+			                value: ''
+			            }],
+			            lineStyle: {
+			                normal: {
+			                    opacity: 0.9,
+			                    width: 1,
+			                    curveness: 0
+			                }
+			            }
+				    }]
+				};
+				relationChart.setOption(relationOpt);
+
+
+				/*************** 浏览器窗口大小变化时，重置报表大小 **************/
+				$(window).resize(function() {
+					mapChart.resize();
+					pieChart1.resize();
+					pieChart2.resize();
+					pieChart3.resize();
+					relationChart.resize();
+				});
+			});
+
+			/*************** 数字变化特效 **************/
+			function rollNum(elId, startVal, endVal, decimalNum) {
+				let n = decimalNum || 0;
+				let countUp = new CountUp(elId, startVal, endVal, n, 2.5, {
+					useEasing: true,
+					useGrouping: true,
+					separator: ',',
+					decimal: '.'
+				});
+				if(!countUp.error) {
+				    countUp.start();
+				}else {
+				    console.error(countUp.error);
+				}
+			}
+		</script>
+	</body>
+</html>

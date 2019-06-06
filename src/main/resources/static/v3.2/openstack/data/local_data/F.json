@@ -1,0 +1,22 @@
+[{
+	"Float_IP": {
+		"Float_IP_Used": 15,
+		"Float_IP_Total": 1998
+	},
+	"Internet": {
+		"Internet_Used": 3,
+		"Internet_Total": 1998
+	},
+	"Port": {
+		"Port_Used": 24,
+		"Port_Total": 1998
+	},
+	"Routing": {
+		"Routing_Used": 1,
+		"Routing_Total": 1998
+	},
+	"Security": {
+		"Security_Group_Used": 5,
+		"Security_Group_Total": 1998
+	}
+}]

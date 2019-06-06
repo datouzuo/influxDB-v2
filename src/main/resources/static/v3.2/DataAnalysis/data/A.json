@@ -1,0 +1,146 @@
+[
+	{
+		"id": 1,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+    {
+		"id": 2,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "  40℃"
+	},
+    {
+		"id": 3,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+    {
+		"id": 4,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+    {
+		"id": 5,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+    {
+		"id": 6,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 7,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 8,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 9,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 10,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 11,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 12,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 13,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 14,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 15,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 16,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 17,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 18,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 19,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 20,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 21,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 22,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 23,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	},
+  {
+		"id": 24,
+		"company": "地区A",
+		"Status": "20:00",
+        "Status_rate": "40℃"
+	}
+]

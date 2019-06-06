@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>陕西广电丝路物联云运行监控平台</title>
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+	</head>
+
+	<body>
+		<header id="header">
+			<h3 class="header-title">陕西广电丝路物联云运行监控平台</h3>
+			<div class="header-info header-info-l">数据来源：概要 &amp; 网络拓扑</div>
+			<div class="header-info header-info-r">数据日期：<span id="nowDate"></span></div>
+		</header>
+
+		<footer id="footer"></footer>
+
+		<div id="container">
+			<div id="flexCon">
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-l">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">实例信息</h3>
+							<div class="data-s-title">
+								<table>
+									<tr bgcolor="#0086B6">
+										<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实例名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+										<th>VCPU</th>
+										<th>&nbsp;磁盘&nbsp;</th>
+										<th>&nbsp;内存&nbsp;</th>
+										<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创建后的时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+									</tr>
+								</table>
+							</div>
+							<div class="data-s" id="demo" style="overflow: hidden; height: 310px;">
+								<div id="demo1">
+									<table id="tablelist1"></table>
+								</div>
+								<div id="demo2">
+									<table id="tablelist2"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-c" style="padding-right:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用情况概要</h3>
+							<div class="chart-div chart-done">
+								<table class="data-t">
+									<tr>
+										<th><img src="img/icon-01.png" /></th>
+										<td>
+											<p><span id="listRunningInstance">0</span></p>
+											<p>运行中实例数</p>
+										</td>
+										<th><img src="img/icon-02.png" /></th>
+										<td>
+											<p><span id="listEnabledMemory">0</span></p>
+											<p>已启用内存(GB)</p>
+										</td>
+									</tr>
+									<tr>
+										<th><img src="img/icon-05.png" /></th>
+										<td>
+											<p><span id="listRAMFree">0</span></p>
+											<p>内存空闲量(GB)</p>
+										</td>
+										<th><img src="img/icon-03.png" /></th>
+										<td>
+											<p><span id="listDiskUsed">0</span></p>
+											<p>磁盘使用量(TB)</p>
+										</td>
+									</tr>
+									<tr>
+										<th><img src="img/icon-05.png" /></th>
+										<td>
+											<p><span id="listDiskFree">0</span></p>
+											<p>磁盘空闲量(TB)</p>
+										</td>
+										<th><img src="img/icon-04.png" /></th>
+										<td>
+											<p><span id="listDiskAvailable">0</span></p>
+											<p>磁盘可用量(TB)</p>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-r" style="padding-left:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU综合使用率</h3>
+							<div class="chart-div" id="mapChart">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-l" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">上限摘要</h3>
+
+							<div class="chart-div" id="pieChart1">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-l" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title"></h3>
+
+							<div class="chart-div" id="pieChart2">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-l" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title"></h3>
+
+							<div class="chart-div" id="pieChart3">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-r" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">网络拓扑</h3>
+							<div class="chart-div" id="relationChart">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--外部引用-->
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/countUp.min.js"></script>
+		<script type="text/javascript" src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="js/echarts-map-china.js"></script>
+		<script type="text/javascript" src="js/echarts-theme-shine.js"></script>
+
+		<!--内部业务逻辑-->
+		<script type="text/javascript">
+			$(function() {
+				/*************** 获取当天信息**************/
+				(function() {
+					const now = new Date();
+					const year = now.getFullYear();
+					const month = now.getMonth()+1;
+					const day = now.getDate();
+					$("#nowDate").html(year+"年"+month+"月"+day+"日");
+				})();
+				/*************** 使用量列表 **************/
+				$.ajax({
+					url: "data/local_data/A.json",
+					type: "get",
+					dataType: "json",
+					// url: "http://222.24.63.59:9069/dashboard/aarea.json",
+					// dataType: "json",
+					success:function (data) {
+						for(k in data.data){
+						    var tr;
+						    tr = '<td>' + data.data[k].instance_Name + '</td>'
+								+ '<td>' + data.data[k].vcpu_Number + '</td>'
+								+ '<td>' + data.data[k].disk_Capacity +'G'+ '</td>'
+								+ '<td>' + parseInt((data.data[k].memory_Capacity)/1024) + 'G'+'</td>'
+								+ '<td>' + data.data[k].creation_Time + '</td>';
+							$("#tablelist1").append('<tr>' + tr + '</tr>')
+							$("#tablelist2").append('<tr>' + tr + '</tr>')
+						}
+                    }
+				}).fail(function(jqXHR, textStatus) {
+					console.log("Ajax Error: ", textStatus);
+				});
+
+				/*************** 使用情况概要 **************/
+				$.ajax({
+                    url: "data/local_data/B.json",
+					type: "get",
+					dataType: "json"
+
+					// url: "http://222.24.63.59:9069/dashboard/barea.json",
+					// dataType: "json"
+				}).done(function(data) {
+					//console.log('Data: ', data);
+					rollNum("listRunningInstance", 0, data.running_Instance);
+					rollNum("listEnabledMemory", 0, data.enabled_Memory/1024);
+					rollNum("listDiskUsed", 0, data.disk_Used/1024, 2);
+					rollNum("listDiskAvailable", 0, data.disk_Available/1024, 2);
+					rollNum("listDiskFree", 0, data.disk_Free/1024, 2);
+					rollNum("listRAMFree", 0, data.ram_Free/1024, 2);
+				}).fail(function(jqXHR, textStatus) {
+					console.log("Ajax Error: ", textStatus);
+				});
+
+				/*************** CPU使用率 **************/
+				const mapChart = echarts.init(document.getElementById("mapChart"), "shine");
+				const mapChartOpt = {
+					tooltip : {
+						formatter: "{a} <br/>{b} : {c}%"
+					},
+					series: [
+						{
+							name: '业务指标',
+							type: 'gauge',
+							detail: {formatter:'{value}%'},
+							data: [{value: Math.floor(Math.random() * 10) + 20, name: '使用率'}]
+						}
+					]
+				};
+
+				// setInterval(function () {
+				// 	// mapChartOpt.series[0].data[0].value = (Math.random() * 10).toFixed(2) - 0;
+				// 	mapChartOpt.series[0].data[0].value = Math.floor(Math.random() * 10) + 20;
+				// 	mapChart.setOption(mapChartOpt, true);
+				// },5000);
+				mapChart.setOption(mapChartOpt);
+
+				/*************** 上限摘要数据 **************/
+				const pieChart1 = echarts.init(document.getElementById("pieChart1"), "shine");
+				const pieChart1Opt = {
+				    title:{
+				        text:'计算资源',
+						textStyle:{
+							color:'#FFFFFF',
+							fontSize:16
+						},
+						bottom:'20px',
+						left:'20px'
+					},
+					angleAxis: {
+						type: 'category',
+						data: ['实例', 'VCPU数量', '内存'],
+						axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					radiusAxis: {
+				        axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					polar: {
+					},
+					series: [{
+						type: 'bar',
+						// data: [8/50, 0, 0],
+						coordinateSystem: 'polar',
+						name: '实例',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#EA9502"
+							}
+						}
+					}, {
+						type: 'bar',
+						// data: [0, 88/100, 0],
+						coordinateSystem: 'polar',
+						name: 'VCPU数量',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#1A5E91"
+							}
+						}
+					}, {
+						type: 'bar',
+						// data: [0, 0, 176/256],
+						coordinateSystem: 'polar',
+						name: '内存',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#C12E34"
+							}
+						}
+					}],
+					legend: {
+						show: true,
+						// data: ['实例', 'VCPU数量', '内存'],
+        				textStyle:{color:"#B0C2F9"}
+					}
+				};
+				pieChart1.setOption(pieChart1Opt);
+				$.ajax({
+					url: "data/local_data/D.json",
+					dataType: "json"
+					// url: "http://222.24.63.59:9069/dashboard/darea.json",
+					// dataType: "json"
+				}).done(function() {
+					$("#pieChart1").addClass("chart-done");
+				}).done(function(data) {
+                    const Data1 = data[0].Instance.Instance_Used / data[0].Instance.Instance_Total;
+					const Data2 = data[0].VCPU.VCPU_Used / data[0].VCPU.VCPU_Total;
+                    const Data3 = (data[0].Memory.Memory_Used / 1024) / data[0].Memory.Memory_Total;
+                    // 打印信息
+					// console.log('Data: ', data[0].Instance.Instance_Used);
+					// console.log('Data1: ', data[0].Instance.Instance_Used / data[0].Instance.Instance_Total);
+					// console.log('Data2: ', data[0].VCPU.VCPU_Used / data[0].VCPU.VCPU_Total);
+					// console.log('Data3: ', (data[0].Memory.Memory_Used / 1024) / data[0].Memory.Memory_Total);
+					var char1 =  '' + (data[0].Instance.Instance_Used).toString() + '/' + (data[0].Instance.Instance_Total).toString()
+					var char2 =  '' + (data[0].VCPU.VCPU_Used).toString() + '/' + (data[0].VCPU.VCPU_Total).toString()
+					var char3 =  '' + parseInt((data[0].Memory.Memory_Used / 1024)).toString() + '/' + (data[0].Memory.Memory_Total).toString()
+
+					pieChart1.setOption({
+						series: [
+						    {
+						        data: [Data1, 0, 0]
+							},
+							{
+						        data: [0, Data2, 0]
+							},
+							{
+						        data: [0, 0, Data3]
+							}
+						],
+						angleAxis: {
+							data: [
+							    '实例：'+ '\n' + '\n' + char1,
+								'VCPU数量：' + char2,
+								'内存：'+ '\n' + '\n' + char3
+							]
+						}
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+
+				const pieChart2 = echarts.init(document.getElementById("pieChart2"), "shine");
+				const pieChart2Opt = {
+				    title:{
+				        text:'卷资源',
+						textStyle:{
+							color:'#FFFFFF',
+							fontSize:16
+						},
+						bottom:'20px',
+						left:'20px'
+					},
+					angleAxis: {
+						type: 'category',
+						data: ['卷', '卷快照', '卷存储'],
+						axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					radiusAxis: {
+				        axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					polar: {
+					},
+					series: [{
+						type: 'bar',
+						// data: [1/10, 0, 0],
+						coordinateSystem: 'polar',
+						name: '卷',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#EA9502"
+							}
+						}
+					}, {
+						type: 'bar',
+						// data: [0, 0/10, 0],
+						coordinateSystem: 'polar',
+						name: '卷快照',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#1A5E91"
+							}
+						}
+					}, {
+						type: 'bar',
+						// data: [0, 0, 1/1000],
+						coordinateSystem: 'polar',
+						name: '卷存储',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#C12E34"
+							}
+						}
+					}],
+					legend: {
+						show: true,
+						// data: ['卷', '卷快照', '卷存储'],
+        				textStyle:{color:"#B0C2F9"}
+					}
+				};
+				pieChart2.setOption(pieChart2Opt);
+				$.ajax({
+					url: "data/local_data/E.json",
+					dataType: "json"
+					// url: "http://222.24.63.59:9069/dashboard/earea.json",
+					// dataType: "json"
+				}).done(function() {
+					$("#pieChart2").addClass("chart-done");
+				}).done(function(data) {
+                    const Data1 = data[0].Volume.Volume_Used / data[0].Volume.Volume_Total;
+					const Data2 = data[0].Volume_Snapshot.Volume_Snapshot_Used / data[0].Volume_Snapshot.Volume_Snapshot_Total;
+                    const Data3 = data[0].Volume_Storage.Volume_Storage_Used / data[0].Volume_Storage.Volume_Storage_Total;
+                    // 打印信息
+                    // console.log('Data1: ', data[0].Volume.Volume_Used / data[0].Volume.Volume_Total);
+                    // console.log('Data2: ', data[0].Volume_Snapshot.Volume_Snapshot_Used / data[0].Volume_Snapshot.Volume_Snapshot_Total);
+                    // console.log('Data3: ', data[0].Volume_Storage.Volume_Storage_Used / data[0].Volume_Storage.Volume_Storage_Total);
+					var char1 =  '' + (data[0].Volume.Volume_Used).toString() + '/' + (data[0].Volume.Volume_Total).toString()
+					var char2 =  '' + (data[0].Volume_Snapshot.Volume_Snapshot_Used).toString() + '/' + (data[0].Volume_Snapshot.Volume_Snapshot_Total).toString()
+					var char3 =  '' + (data[0].Volume_Storage.Volume_Storage_Used).toString() + '/' + (data[0].Volume_Storage.Volume_Storage_Total).toString()
+
+					pieChart2.setOption({
+						series: [
+						    {
+						        data: [Data1, 0, 0]
+							},
+							{
+						        data: [0, Data2, 0]
+							},
+							{
+						        data: [0, 0, Data3]
+							}
+						],
+						angleAxis: {
+							data: [
+							    '卷：'+ '\n' + '\n' + char1,
+								'卷快照：' + char2,
+								'卷存储：'+ '\n' + '\n' + char3
+							]
+						}
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+
+
+				const pieChart3 = echarts.init(document.getElementById("pieChart3"), "shine");
+				const pieChart3Opt = {
+				    title:{
+				        text:'网络资源',
+						textStyle:{
+							color:'#FFFFFF',
+							fontSize:16
+						},
+						bottom:'20px',
+						left:'10px'
+					},
+					angleAxis: {
+						type: 'category',
+						// data: ['浮动IP', '安全组',  '网络', '端口', '路由'],
+						axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					radiusAxis: {
+				        axisLine:{
+						    width:5,
+							lineStyle:{
+								color: "#B0C2F9"
+							}
+						}
+					},
+					polar: {
+					},
+					series: [{
+						type: 'bar',
+						// data: [14/50, 0, 0, 0, 0, 0],
+						coordinateSystem: 'polar',
+						name: '浮动IP',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#FF6C87"
+							}
+						}
+					}, {
+						type: 'bar',
+						// data: [0, 4/10, 0, 0, 0, 0],
+						coordinateSystem: 'polar',
+						name: '安全组',
+						stack: 'a',
+						itemStyle:{
+							normal:{
+								color:"#1A5E91"
+							}
+						}
+					}, {
+                        type: 'bar',
+                        // data: [0, 0, 0, 3/100, 0, 0],
+                        coordinateSystem: 'polar',
+                        name: '网络',
+                        stack: 'a',
+                        itemStyle: {
+                            normal: {
+                                color: "#2B821D"
+                            }
+                        }
+                    }, {
+                        type: 'bar',
+                        // data: [0, 0, 0, 0, 15/500, 0],
+                        coordinateSystem: 'polar',
+                        name: '端口',
+                        stack: 'a',
+                        itemStyle: {
+                            normal: {
+                                color: "#5E43B1"
+                            }
+                        }
+                    }, {
+                        type: 'bar',
+                        // data: [0, 0, 0, 0, 0, 1/10],
+                        coordinateSystem: 'polar',
+                        name: '路由',
+                        stack: 'a',
+                        itemStyle: {
+                            normal: {
+                                color: "#FFB67F"
+                            }
+                        }
+                    }],
+					legend: {
+						show: true,
+						data: ['浮动IP', '安全组', '网络', '端口', '路由'],
+        				textStyle:{color:"#B0C2F9"}
+					}
+				};
+				pieChart3.setOption(pieChart3Opt);
+				$.ajax({
+					url: "data/local_data/F.json",
+					dataType: "json"
+					// url: "http://222.24.63.59:9069/dashboard/farea.json",
+					// dataType: "json"
+				}).done(function() {
+					$("#pieChart3").addClass("chart-done");
+				}).done(function(data) {
+                    const Data1 = data[0].Float_IP.Float_IP_Used / data[0].Float_IP.Float_IP_Total;
+					const Data2 = data[0].Security.Security_Group_Used / data[0].Security.Security_Group_Total;
+                    const Data3 = data[0].Internet.Internet_Used / data[0].Internet.Internet_Total;
+                    const Data4 = data[0].Port.Port_Used / data[0].Port.Port_Total;
+					const Data5 = data[0].Routing.Routing_Used / data[0].Routing.Routing_Total;
+					var char1 =  '' + (data[0].Float_IP.Float_IP_Used).toString() + '/' + (data[0].Float_IP.Float_IP_Total).toString()
+					var char2 =  '' + (data[0].Security.Security_Group_Used).toString() + '/' + (data[0].Security.Security_Group_Total).toString()
+					var char3 =  '' + (data[0].Internet.Internet_Used).toString() + '/' + (data[0].Internet.Internet_Total).toString()
+					var char4 =  '' + (data[0].Port.Port_Used).toString() + '/' + (data[0].Port.Port_Total).toString()
+					var char5 =  '' + (data[0].Routing.Routing_Used).toString() + '/' + (data[0].Routing.Routing_Total).toString()
+
+					pieChart3.setOption({
+						series: [
+						    {
+						        data: [Data1, 0, 0, 0, 0]
+							},
+							{
+						        data: [0, Data2, 0, 0, 0]
+							},
+							{
+						        data: [0, 0, Data3, 0, 0]
+							},
+							{
+						        data: [0, 0, 0, Data4, 0]
+							},
+							{
+						        data: [0, 0, 0, 0, Data5]
+							}
+						],
+						angleAxis: {
+							data: [
+							    '浮动IP：'+ '\n' + '\n' + char1,
+								'安全组：'+ '\n' + '\n' + char2,
+								'网络：'+ char3,
+								'端口：'+ '\n' + '\n' + char4,
+								'路由：'+ char5
+							]
+						}
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+
+
+				/*************** 网络拓扑 **************/
+				//初始化echarts实例
+				var categories = [];
+				var data = [];
+				var links = [];
+				const relationChart = echarts.init(document.getElementById("relationChart"));
+				const relationOpt = {
+				    animationDurationUpdate: 1500,
+				    animationEasingUpdate: 'quinticInOut',
+				    label: {
+				        normal: {
+				            show: true,
+				            textStyle: {
+				                fontSize: 12
+				            }
+				        }
+				    },
+				    series: [{
+			            type: 'graph',
+			            symbolSize: 45,
+			            focusNodeAdjacency: true,
+			            roam: true,
+			            layout: 'force',
+			            force: {
+			                repulsion: 100 //斥力因子，值越大，斥力越大
+			            },
+			            label: {
+			                normal: {
+			                    show: true,
+			                    textStyle: {
+			                        fontSize: 12
+			                    }
+			                }
+			            },
+			            edgeSymbolSize: [4, 50],
+			            edgeLabel: {
+			                normal: {
+			                    show: true,
+			                    textStyle: {
+			                        fontSize: 10
+			                    },
+			                    formatter: "{c}"
+			                }
+			            },
+			            // categories: [{
+			            // 	name: '云服务器',
+			            // 	itemStyle: {
+			            // 		normal: {
+			            // 			color: '#f2637b'
+			            // 		}
+			            // 	}
+			            // }, {
+			            //     name: '路由1',
+			            //     itemStyle: {
+			            //         normal: {
+			            //             color: "#eaa674"
+			            //         }
+			            //     }
+			            // }, {
+			            //     name: '路由2',
+			            //     itemStyle: {
+			            //         normal: {
+			            //             color: "#3aa1ff"
+			            //         }
+			            //     }
+			            // }, {
+			            //     name: '路由3',
+			            //     itemStyle: {
+			            //         normal: {
+			            //             color: "#4ecb73"
+			            //         }
+			            //     }
+			            // }],
+			            // data: [{
+			            // 	name: '云服务器',
+			            // 	category: 0,
+			            // 	draggable: true
+			            // }, {
+			            // 	name: '路由1',
+			            // 	category: 1,
+			            // 	draggable: true
+			            // }, {
+			            // 	name: '路由2',
+			            // 	category: 2,
+			            // 	draggable: true
+			            // }, {
+			            // 	name: '路由3',
+			            // 	category: 3,
+			            // 	draggable: true
+			            // }, {
+			            //     name: '终端A',
+			            //     category: 1,
+			            //     draggable: true
+			            // }, {
+			            //     name: '终端B',
+			            //     category: 1,
+			            //     draggable: true
+			            // }, {
+			            //     name: '终端C',
+			            //     category: 1,
+			            //     draggable: true
+			            // }, {
+			            //     name: '终端D',
+			            //     category: 1,
+			            //     draggable: true
+			            // }, {
+			            //     name: '终端E',
+			            //     category: 3,
+			            //     draggable: true
+			            // }, {
+			            //     name: '终端F',
+			            //     category: 3,
+			            //     draggable: true
+			            // }, {
+			            //     name: '终端G',
+			            //     category: 3,
+			            //     draggable: true
+			            // }, {
+			            //     name: '终端H',
+			            //     category: 2,
+			            //     draggable: true
+			            // }],
+			            // links: [{
+			            // 	source: 0,
+			            //     target: 1,
+			            //     value: ''
+			            // }, {
+			            // 	source: 0,
+			            //     target: 2,
+			            //     value: ''
+			            // }, {
+			            // 	source: 0,
+			            //     target: 3,
+			            //     value: ''
+			            // }, {
+			            //     source: 1,
+			            //     target: 4,
+			            //     value: ''
+			            // }, {
+			            // 	source: 1,
+			            //     target: 5,
+			            //     value: ''
+			            // }, {
+			            // 	source: 1,
+			            //     target: 6,
+			            //     value: ''
+			            // }, {
+			            // 	source: 1,
+			            //     target: 7,
+			            //     value: ''
+			            // }, {
+			            // 	source: 3,
+			            //     target: 8,
+			            //     value: ''
+			            // }, {
+			            // 	source: 3,
+			            //     target: 9,
+			            //     value: ''
+			            // }, {
+			            // 	source: 3,
+			            //     target: 10,
+			            //     value: ''
+			            // }, {
+			            // 	source: 2,
+			            //     target: 11,
+			            //     value: ''
+			            // }],
+			            lineStyle: {
+			                normal: {
+			                    opacity: 0.9,
+			                    width: 1,
+			                    curveness: 0
+			                }
+			            }
+				    }]
+				};
+				relationChart.setOption(relationOpt);
+				$.ajax({
+					url: "data/local_data/G.json",
+					dataType: "json"
+					// url: "http://222.24.63.59:9069/dashboard/garea.json",
+					// dataType: "json"
+				}).done(function() {
+					$("#relationChart").addClass("chart-done");
+				}).done(function(resultdata) {
+					const subnetsName = [];
+					const subnetsCategory = [];
+					const allocationsName = [];
+					const allocationsCategory = [];
+					for(let i in resultdata[0].subnets) {
+						subnetsName.push( resultdata[0].subnets[i].name);
+						subnetsCategory.push((resultdata[0].subnets[i].category + 1));
+					}
+					for(let i in resultdata[0].allocations) {
+						allocationsName.push( resultdata[0].allocations[i].name);
+						allocationsCategory.push((resultdata[0].allocations[i].belong_category + 1));
+					}
+					const allName = subnetsName.concat(allocationsName);
+					const allCategory = subnetsCategory.concat(allocationsCategory);
+					console.log("subnetsName: ", subnetsName);
+					console.log("subnetsCategory: ", subnetsCategory);
+					console.log("allocationsName: ", allocationsName);
+					console.log("allocationsCategory: ", allocationsCategory);
+					console.log("allName: ", allName);
+					console.log("allCategory: ", allCategory);
+
+					categories.push({
+							name: '云服务器',
+							itemStyle: {
+								normal: {
+									color: '#88cc81'
+								}
+							}
+                    	});
+
+                    for(var i=0; i<subnetsName.length;i++){
+					    categories.push({
+							name: subnetsName[i],
+							itemStyle: {
+								normal: {
+									color: function () {
+										var colors = ['#fda67e', '#81cacc', '#cca8ba', "#88cc81", "#82a0c5", '#fddb7e', '#735ba1', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];
+										return colors[parseInt(Math.random() * 10)];
+									}
+								}
+							}
+                    	})
+                    }
+					console.log("categories: ", categories);
+
+					data.push({
+							name: '云服务器',
+							category: 0,
+							draggable: true
+					});
+
+                    for(var j=0; j<allName.length;j++){
+					    data.push({
+                                name: allName[j],
+                                category: allCategory[j],
+                                draggable: true
+                        })
+                    }
+					console.log("data: ", data);
+
+                    for(var k1=0; k1<subnetsCategory.length;k1++){
+					    links.push({
+								source: 0,
+								target: k1+1,
+								value: ''
+                        })
+                    }
+
+                    for(var k2=0; k2<allocationsCategory.length;k2++){
+					    links.push({
+								source: allocationsCategory[k2],
+								target: k2+subnetsCategory.length+1,
+								value: ''
+                        })
+                    }
+					console.log("links: ", links);
+
+					relationChart.setOption({
+                        series:[{
+                            categories: categories,
+							data: data,
+							links: links
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				/*************** 浏览器窗口大小变化时，重置报表大小 **************/
+				$(window).resize(function() {
+					mapChart.resize();
+					pieChart1.resize();
+					pieChart2.resize();
+					pieChart3.resize();
+					relationChart.resize();
+				});
+			});
+
+			/*************** 数字变化特效 **************/
+			function rollNum(elId, startVal, endVal, decimalNum) {
+				let n = decimalNum || 0;
+				let countUp = new CountUp(elId, startVal, endVal, n, 2.5, {
+					useEasing: true,
+					useGrouping: true,
+					separator: ',',
+					decimal: '.'
+				});
+				if(!countUp.error) {
+				    countUp.start();
+				}else {
+				    console.error(countUp.error);
+				}
+			}
+		</script>
+		<script type="text/javascript">
+			var speed = 50;
+			demo2.innerHTML = demo1.innerHTML;
+			// 打印差值
+			// console.log(demo2.offsetTop - demo.scrollTop);
+			function Marquee() {
+				if (demo2.offsetTop - demo.scrollTop <= 76) {
+					demo.scrollTop -= demo1.offsetHeight;
+				} else {
+					demo.scrollTop++;
+				}
+			}
+			var MyMar = setInterval(Marquee, speed);
+
+			demo.onmouseover = function() {
+				clearInterval(MyMar);
+			};
+
+			demo.onmouseout = function() {
+				MyMar = setInterval(Marquee, speed);
+			}
+		</script>
+		<!--自动刷新-->
+		<script language="JavaScript" type="text/javascript">
+			setTimeout(function(){location.reload()},30000); //指定20秒刷新一次
+		</script>
+
+		<!--<script language="javascript" type="text/javascript">-->
+			<!--// 以下方式直接跳转-->
+			<!--// window.location.href='hello.html';-->
+			<!--// 以下方式定时跳转-->
+			<!--setTimeout("javascript:location.href='../k8s/index_local.html'", 30000);-->
+		<!--</script>-->
+	</body>
+</html>

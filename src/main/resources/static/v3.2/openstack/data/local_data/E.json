@@ -1,0 +1,14 @@
+[{
+	"Volume": {
+		"Volume_Used": 3,
+		"Volume_Total": 1998
+	},
+	"Volume_Snapshot": {
+		"Volume_Snapshot_Used": 0,
+		"Volume_Snapshot_Total": 1998
+	},
+	"Volume_Storage": {
+		"Volume_Storage_Used": 235,
+		"Volume_Storage_Total": 1998
+	}
+}]

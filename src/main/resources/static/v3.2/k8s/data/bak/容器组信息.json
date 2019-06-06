@@ -1,0 +1,32 @@
+/*
+容器组信息
+*/
+[
+	{
+		"ContainerGroup_Name": "httpd-7667fd7899-dl48r",
+		"Node_Name": "k8s-node2",
+		"Status": "Running",
+        "Restarted": 2,
+		"Created_time": 21,
+        "CPU": 0,
+		"Memory": 15434
+	},
+	{
+		"ContainerGroup_Name": "httpd-7667fd7899-mkrx5",
+		"Node_Name": "k8s-node1",
+		"Status": "Running",
+        "Restarted": 2,
+		"Created_time": 21,
+        "CPU": 0,
+		"Memory": 20801
+	},
+    {
+		"ContainerGroup_Name": "httpd-7667fd7899-nfdwg",
+		"Node_Name": "k8s-node2",
+		"Status": "Running",
+        "Restarted": 2,
+		"Created_time": 21,
+        "CPU": 0,
+		"Memory": 21016
+	}
+]

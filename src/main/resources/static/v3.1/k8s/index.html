@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<title>陕西广电丝路物联云运行监控平台Ⅱ</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/app.css" />
+	</head>
+	<body class="bg01">
+		<header class="header">
+			<h3>陕西广电丝路物联云运行监控平台Ⅱ</h3>
+		</header>
+
+		
+		<div class="wrapper">
+			<div class="container-fluid">
+				<div class="row fill-h">
+					<div class="col-lg-3 fill-h">
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel">
+								<h3 class="table-title">节点状态信息</h3>
+								<div class="data-s">
+									<table>
+										<tr bgcolor="#0086B6">
+											<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+											<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已就绪</td>
+											<td>CPU使用率</td>
+											<td>CPU总量</td>
+											<td>内存使用量</td>
+											<td>内存总量</td>
+											<td>已创建</td>
+										</tr>
+									</table>
+								</div>
+								<div class="data-s" id="Nodedemo" style="overflow: hidden; height: 160px;">
+								<div id="Nodedemo1">
+									<table id="Nodetablelist1"></table>
+								</div>
+								<div id="Nodedemo2">
+									<table id="Nodetablelist2"></table>
+								</div>
+							</div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel">
+								<h3 class="table-title">CPU使用率</h3>
+								<div class="fill-h-1" id="NodecpuMap"></div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel">
+								<h3 class="table-title">内存使用量</h3>
+								<div class="fill-h-1" id="NodestoreMap"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 fill-h">
+						<div class="xpanel-wrapper xpanel-wrapper-6">
+							<div class="xpanel">
+								<div class="fill-h" id="flyMap"></div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="col-lg-4 xpanel">
+								<div class="fill-h" id="SourceMap_1"></div>
+							</div>
+							<div class="col-lg-4 xpanel">
+								<div class="fill-h" id="SourceMap_2"></div>
+							</div>
+							<div class="col-lg-4 xpanel">
+								<div class="fill-h" id="SourceMap_3"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 fill-h">
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel">
+								<h3 class="table-title">容器组状态信息</h3>
+								<div class="data-s" >
+									<table>
+										<tr bgcolor="#0086B6">
+											<td>&nbsp;&nbsp;&nbsp;名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+											<td>&nbsp;&nbsp;&nbsp;节点&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+											<td>&nbsp;&nbsp;&nbsp;&nbsp;状态&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+											<td>已重启</td>
+											<td>已创建</td>
+											<td>CPU使用率</td>
+											<td>&nbsp;&nbsp;内存&nbsp;&nbsp;&nbsp;</td>
+										</tr>
+									</table>
+								</div>
+								<div class="data-s" id="RQdemo" style="overflow: hidden; height: 160px;">
+								<div id="RQdemo1">
+									<table id="RQtablelist1"></table>
+								</div>
+								<div id="RQdemo2">
+									<table id="RQtablelist2"></table>
+								</div>
+							</div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel">
+								<h3 class="table-title">CPU使用率</h3>
+								<div class="fill-h-1" id="ContainercpuMap"></div>
+							</div>
+						</div>
+						<div class="xpanel-wrapper xpanel-wrapper-3">
+							<div class="xpanel">
+								<h3 class="table-title">内存使用量</h3>
+								<div class="fill-h-1" id="ContainerstoreMap"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/echarts-3.8.5.min.js"></script>
+		<script type="text/javascript" src="js/echarts-map-world.js"></script>
+		<script type="text/javascript" src="js/echarts-map-china.js"></script>
+		<script type="text/javascript" src="js/echarts-china-provinces/jiangsu.js"></script>
+		<script type="text/javascript" src="js/echarts-china-cities/jiang1_su1_su1_zhou1.js"></script>
+		<script type="text/javascript" src="js/echarts-china-counties/jiang1su1_su1zhou1_kun1shan1shi4.js"></script>
+		<script type="text/javascript">
+			$(function() {
+
+			    /*************** 数据连接测试 **************/
+
+				$.ajax({
+					url: "http://222.24.63.58/api-index/?format=json",
+					// url: "http://222.24.63.59:9068/k8s/node/message.json",
+					// xhrFields: {
+					// 	withCredentials: true
+					// },
+					dataType: "json",
+					success:function (data) {
+					    const Name = [];
+						const Head_num = [];
+						for(k in data){
+							Name.push(data[k].student_name);
+							Head_num.push(data[k].head_pose_up);
+						}
+						console.log("Name: ", Name);
+						console.log("Head_num: ", Head_num);
+                    }
+				}).fail(function(jqXHR, textStatus) {
+					console.log("Ajax Error: ", textStatus);
+				});
+
+
+
+			    /*************** 节点信息 **************/
+				$.ajax({
+					url: "http://222.24.63.59:9068/k8s/node/message.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json",
+					success:function (data) {
+						for(k in data){
+						    var tr;
+						    tr = '<td>' + data[k].node_Name + '</td>'
+								+ '<td>' + data[k].ready + '</td>'
+								+ '<td>' + (data[k].cPU_request_rate).toFixed(2) + "%" + '</td>'
+								+ '<td>' + parseInt(data[k].cPU_count / 1024)  + "TB" + '</td>'
+								+ '<td>' + parseInt(data[k].memory_used / 1024) + "GB" + '</td>'
+								+ '<td>' + parseInt(data[k].memory_num / 1024) + "GB" + '</td>'
+								+ '<td>' + parseInt(data[k].created_time)+ '天' + '</td>';
+							$("#Nodetablelist1").append('<tr>' + tr + '</tr>')
+							$("#Nodetablelist2").append('<tr>' + tr + '</tr>')
+						}
+                    }
+				}).fail(function(jqXHR, textStatus) {
+					console.log("Ajax Error: ", textStatus);
+				});
+
+				/*************** 容器组信息 **************/
+				$.ajax({
+					url: "http://222.24.63.59:9068/k8s/pod/message.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json",
+					success:function (data) {
+						for(k in data){
+						    var tr;
+						    tr = '<td>' + (data[k].containerGroup_Name).substring((data[k].containerGroup_Name).length-5) + '</td>'
+								+ '<td>' + (data[k].node_Name).substring((data[k].node_Name).length-6) + '</td>'
+								+ '<td>' + data[k].status + '</td>'
+								+ '<td>' + data[k].restarted + '次' + '</td>'
+								+ '<td>' + parseInt(data[k].created_time) + '天' + '</td>'
+								+ '<td>' + (data[k].cPU).toFixed(3) + '%'+ '</td>'
+								+ '<td>' + parseInt(data[k].memory) + 'MB' + '</td>';
+							$("#RQtablelist1").append('<tr>' + tr + '</tr>');
+							$("#RQtablelist2").append('<tr>' + tr + '</tr>')
+						}
+                    }
+				}).fail(function(jqXHR, textStatus) {
+					console.log("Ajax Error: ", textStatus);
+				});
+
+				/******************* 业务辐射地区 ******************/
+				//初始化echarts实例
+				const flyMap = echarts.init(document.getElementById("flyMap"));
+		        //城市经纬度
+		        const originName = '西安';
+		        const flyGeo = {
+		        	'洛阳': [112.460299, 34.62677],
+		            '西安': [108.946466, 34.347269],
+		            '兰州': [103.84044, 36.067321],
+		            '乌鲁木齐': [87.62444, 43.830763],
+		            '包头': [109.846544, 40.662929],
+		            '西宁': [101.78443, 36.623393],
+		            '银川': [106.258602, 38.487834],
+		            '成都': [104.081534, 30.655822],
+		            '重庆': [106.558434, 29.568996],
+		            '拉萨': [91.120789, 29.65005],
+		            '昆明': [102.852448, 24.873998],
+		            '贵阳': [106.636577, 26.653325],
+		            '太原': [112.534919, 37.873219],
+		            '武汉': [114.311582, 30.598467],
+		            '长沙': [112.945473, 28.234889],
+		            '南昌': [115.864589, 28.689455],
+		            '合肥': [117.233443, 31.826578],
+		            '杭州': [120.215503, 30.253087],
+		            '广州': [113.271431, 23.135336],
+		            '北京': [116.413384, 39.910925],
+		            '天津': [117.209523, 39.093668]
+		        };
+		        //飞线数据
+		        var flyVal = [
+		            [{name: '西安'}, {name: '洛阳', value: 35}],
+		            [{name: '西安'}, {name: '西安', value: 100}],
+		            [{name: '西安'}, {name: '兰州', value: 25}],
+		            [{name: '西安'}, {name: '乌鲁木齐', value: 55}],
+		            [{name: '西安'}, {name: '包头', value: 60}],
+		            [{name: '西安'}, {name: '西宁', value: 45}],
+		            [{name: '西安'}, {name: '银川', value: 35}],
+		            [{name: '西安'}, {name: '成都', value: 35}],
+		            [{name: '西安'}, {name: '重庆', value: 40}],
+		            [{name: '西安'}, {name: '拉萨', value: 45}],
+		            [{name: '西安'}, {name: '昆明', value: 50}],
+		            [{name: '西安'}, {name: '贵阳', value: 55}],
+		            [{name: '西安'}, {name: '太原', value: 60}],
+		            [{name: '西安'}, {name: '武汉', value: 65}],
+		            [{name: '西安'}, {name: '长沙', value: 70}],
+		            [{name: '西安'}, {name: '南昌', value: 75}],
+		            [{name: '西安'}, {name: '合肥', value: 80}],
+		            [{name: '西安'}, {name: '杭州', value: 85}],
+		            [{name: '西安'}, {name: '广州', value: 90}],
+		            [{name: '西安'}, {name: '北京', value: 95}],
+		            [{name: '西安'}, {name: '天津', value: 60}]
+		        ];
+		        //数据转换，转换后格式：[{fromName:'cityName', toName:'cityName', coords:[[lng, lat], [lng, lat]]}, {...}]
+		        const convertFlyData = function(data) {
+		            let res = [];
+		            for(let i=0;i<data.length;i++) {
+		                let dataItem = data[i];
+		                let toCoord = flyGeo[dataItem[0].name];
+		                let fromCoord = flyGeo[dataItem[1].name];
+		                if(fromCoord && toCoord) {
+		                    res.push({
+		                        fromName: dataItem[1].name,
+		                        toName: dataItem[0].name,
+		                        coords: [fromCoord, toCoord]
+		                    });
+		                }
+		            }
+		            return res;
+		        };
+		        //报表配置
+		        const flySeries = [];
+		        [[originName, flyVal]].forEach(function(item, i) {
+					flySeries.push({
+				        name: item[0],
+				        type: 'lines',
+				        zlevel: 1,
+				        symbol: ['none', 'none'],
+				        symbolSize: 0,
+				        effect: { //特效线配置
+				            show: true,
+				            period: 5, //特效动画时间，单位s
+				            trailLength: 0.1, //特效尾迹的长度，从0到1
+				            symbol: 'arrow',
+				            symbolSize: 5
+				        },
+				        lineStyle: {
+				            normal: {
+				                color: '#f19000',
+				                width: 1,
+				                opacity: 0.6,
+				                curveness: 0.2 //线的平滑度
+				            }
+				        },
+				        data: convertFlyData(item[1])
+				    }, {
+				        name: item[0],
+				        type: 'effectScatter',
+				        coordinateSystem: 'geo',
+				        zlevel: 2,
+				        rippleEffect: { //涟漪特效
+				            period: 5, //特效动画时长
+				            scale: 4, //波纹的最大缩放比例
+				            brushType: 'stroke' //波纹的绘制方式：stroke | fill
+				        },
+				        label: {
+				            normal: {
+				                show: true,
+				                position: 'top',
+				                formatter: '{b}'
+				            }
+				        },
+				        symbol: 'circle',
+				        symbolSize: function (val) {
+				        	//根据某项数据值设置符号大小
+				            return val[2] / 10;
+				        },
+				        itemStyle: {
+				            normal: {
+				            	color: '#f19000'
+				            }
+				        },
+				        data: item[1].map(function(dataItem) {
+				            return {
+				                name: dataItem[1].name,
+				                value: flyGeo[dataItem[1].name].concat([dataItem[1].value])
+				            };
+				        })
+				    }, { //与上层的点叠加
+				    	name: item[0],
+				        type: 'scatter',
+				        coordinateSystem: 'geo',
+				        zlevel: 3,
+				        symbol: 'circle',
+				        symbolSize: function (val) {
+				        	//根据某项数据值设置符号大小
+				            return val[2] / 15;
+				        },
+				        itemStyle: {
+				            normal: {
+				            	color: '#f00'
+				            }
+				        },
+				        data: item[1].map(function(dataItem) {
+				            return {
+				                name: dataItem[1].name,
+				                value: flyGeo[dataItem[1].name].concat([dataItem[1].value])
+				            };
+				        })
+				    });
+		        });
+
+				//报表配置项
+				const flyMapOpt = {
+					title:{
+						text: '业务辐射图',
+						top: '20px',
+						x: 'center',
+						textStyle:{
+						    fontSize:20,
+							color:'#5dc2fe',
+							fontWeight:'normal'
+						}
+					},
+	                tooltip: {
+	                    trigger: 'item',
+	                    formatter: function(params) {
+	                        if(params.value) {
+	                            return params.name + ' : ' + params.value[2];
+	                        }else {
+	                            return params.name;
+	                        }
+	                    }
+	                },
+				    geo: {
+				        map: 'china',
+				        roam: false, //开启鼠标缩放和漫游
+				        zoom: 1.15, //地图缩放级别
+						selectedMode: false, //选中模式：single | multiple
+						left: 0,
+						right: 0,
+						top: 0,
+						bottom: 0,
+						layoutCenter: ['50%', '50%'], //设置后left/right/top/bottom等属性无效
+						layoutSize: '100%', //保持地图宽高比
+				        label: {
+				            emphasis: {
+				                show: false
+				            }
+				        },
+				        itemStyle: {
+				            normal: {
+				                areaColor: '#101f32',
+				                borderWidth: 1.1,
+				                borderColor: '#43d0d6'
+				            },
+				            emphasis: {
+				                areaColor: '#069'
+				            }
+				        }
+				    },
+				    series: flySeries
+				};
+				//渲染报表
+				flyMap.setOption(flyMapOpt);
+
+
+				/******************* 节点CPU折线图---旧 ******************/
+				// //初始化echarts实例
+				// const NodecpuMap = echarts.init(document.getElementById("NodecpuMap"));
+				// const NodecpuMapOpt = {
+				//     title:{
+				// 		text: 'CPU使用率',
+				// 		top: '21px',
+				// 		left: '5px',
+				// 		textStyle:{
+				// 		    fontSize:20,
+				// 			color:'#5dc2fe',
+				// 			fontWeight:'normal'
+				// 		}
+				// 	},
+				// 	xAxis: {
+				// 		type: 'category',
+				// 		boundaryGap: false,
+				// 		// data: ['10:20', '10:23', '10:26', '10:30', '10:34', '10:36', '10:38'],
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		},
+				// 		axisTick: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	yAxis: {
+				// 		type: 'value',
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	series: [{
+				// 		// data: [820, 932, 901, 934, 1290, 1330, 1320],
+				// 		type: 'line',
+				// 		areaStyle: {}
+				// 	}]
+				// };
+				// NodecpuMap.setOption(NodecpuMapOpt);
+				// $.ajax({
+				// 	// url: "data/node_CPU.json",
+				// 	// dataType: "json"
+				// 	url: "http://222.24.63.59:9068/k8s/cpu/usage_rate/nodeCpu.json",
+				// 	xhrFields: {
+				// 		withCredentials: true
+				// 	},
+				// 	dataType: "json"
+				// }).done(function() {
+				// 	$("#NodecpuMap").addClass("chart-done");
+				// }).done(function(data) {
+				// 	const xData = [];
+				// 	const yData = [];
+				// 	for(let i in data) {
+				// 		xData.push(data[i].time);
+				// 		yData.push(data[i].cPU_used);
+				// 	}
+				// 	NodecpuMap.setOption({
+				// 		xAxis: {
+				// 			data: xData
+				// 		},
+				// 		series: [{
+				// 			data: yData
+				// 		}]
+				// 	});
+				// }).fail(function(jqXHR) {
+				// 	console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				// });
+
+				/****************** 节点CPU折线图---新 ********************/
+				//初始化echart实例
+				const NodecpuMap = echarts.init(document.getElementById("NodecpuMap"));
+				//配置项
+				const NodecpuMapOpt = {
+					tooltip: {
+					  trigger: "axis",
+					  axisPointer: {
+						type: "cross",
+						crossStyle: {
+						  color: "white"
+						}
+					  }
+					},
+					grid:{
+					    x:50
+					},
+					textStyle: {
+					  color: "#a0a8b9"
+					},
+					legend: {
+					  data: ["CPU占比"],
+					  textStyle: {
+						color: "#929aad"
+					  },
+					  right: "8%",
+					  top: "0%"
+					},
+					xAxis: [
+					  {
+						type: "category",
+						name: "",
+						// data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+						axisPointer: {
+						  type: "shadow"
+						}
+					  }
+					],
+					yAxis: [
+					  {
+						type: "value",
+						name: "使用率(%)",
+						// min: 0.1840,
+						// max: 0.1870,
+						// interval: 0.0005,
+						axisLabel: {
+						  formatter: "{value}"
+						}
+					  }
+					],
+					series: [
+					  {
+						name: "CPU占比",
+						type: "line",
+						itemStyle: {
+						  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{
+							  offset: 0,
+							  color: "#0182e8"
+							},
+							{
+							  offset: 1,
+							  color: "#021b4d"
+							}
+						  ]),
+						  barBorderRadius: 5
+						},
+						barWidth: "10px"
+						// data: [35, 50, 45, 22, 17, 60, 15, 10, 16, 80, 60, 90]
+					  }
+					]
+				};
+				//渲染图表
+				NodecpuMap.setOption(NodecpuMapOpt);
+				$.ajax({
+					url: "http://222.24.63.59:9068/k8s/cpu/usage_rate/nodeCpu.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json"
+				}).done(function() {
+					$("#NodecpuMap").addClass("chart-done");
+				}).done(function(data) {
+					const xData = [];
+					const yData = [];
+					for(let i in data) {
+						xData.push(data[i].time);
+						yData.push(data[i].cPU_used);
+					}
+					NodecpuMap.setOption({
+						xAxis: {
+							data: xData
+						},
+						yAxis: {
+							// min: 0.1840,
+							// max: 0.1870,
+							min: Math.min.apply(null, yData) - 0.0005,
+							max: Math.max.apply(null, yData) + 0.0005,
+							interval: 0.003
+						  },
+						series: [{
+							data: yData
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				/******************* 节点内存折线图---旧 ******************/
+				// 初始化echarts实例
+				// const NodestoreMap = echarts.init(document.getElementById("NodestoreMap"));
+				// const NodestoreMapOpt = {
+				//     title:{
+				// 		text: '内存使用量(Mi)',
+				// 		top: '21px',
+				// 		left: '5px',
+				// 		textStyle:{
+				// 		    fontSize:20,
+				// 			color:'#5dc2fe',
+				// 			fontWeight:'normal'
+				// 		}
+				// 	},
+				// 	xAxis: {
+				// 		type: 'category',
+				// 		boundaryGap: false,
+				// 		// data: ['10:20', '10:23', '10:26', '10:30', '10:34', '10:36', '10:38'],
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		},
+				// 		axisTick: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	yAxis: {
+				// 		type: 'value',
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	series: [{
+				// 		// data: [1530, 932, 1100, 934, 1290, 1330, 1320],
+				// 		type: 'line',
+				// 		areaStyle: {}
+				// 	}]
+				// };
+				// NodestoreMap.setOption(NodestoreMapOpt);
+				// $.ajax({
+				// 	// url: "data/node_CPU.json",
+				// 	// dataType: "json"
+				// 	url: "http://222.24.63.59:9068/k8s/cpu/usage/nodememory.json",
+				// 	xhrFields: {
+				// 		withCredentials: true
+				// 	},
+				// 	dataType: "json"
+				// }).done(function() {
+				// 	$("#NodestoreMap").addClass("chart-done");
+				// }).done(function(data) {
+				// 	const xData = [];
+				// 	const yData = [];
+				// 	for(let i in data) {
+				// 		xData.push(data[i].time);
+				// 		yData.push(data[i].memory_used);
+				// 	}
+				// 	NodestoreMap.setOption({
+				// 		xAxis: {
+				// 			data: xData
+				// 		},
+				// 		series: [{
+				// 			data: yData
+				// 		}]
+				// 	});
+				// }).fail(function(jqXHR) {
+				// 	console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				// });
+
+				/****************** 节点内存折线图---新 ********************/
+				//初始化echart实例
+				const NodestoreMap = echarts.init(document.getElementById("NodestoreMap"));
+				//配置项
+				const NodestoreMapOpt = {
+					tooltip: {
+					  trigger: "axis",
+					  axisPointer: {
+						type: "cross",
+						crossStyle: {
+						  color: "white"
+						}
+					  }
+					},
+					grid:{
+					    x:40
+					},
+					textStyle: {
+					  color: "#a0a8b9"
+					},
+					legend: {
+					  data: ["内存使用量"],
+					  textStyle: {
+						color: "#929aad"
+					  },
+					  right: "8%",
+					  top: "0%"
+					},
+					xAxis: [
+					  {
+						type: "category",
+						name: "",
+						// data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+						axisPointer: {
+						  type: "shadow"
+						}
+					  }
+					],
+					yAxis: [
+					  {
+						type: "value",
+						name: "使用量(Mi)",
+						// min: 1560,
+						// max: 1575,
+						// interval: 3,
+						axisLabel: {
+						  formatter: "{value}"
+						}
+					  }
+					],
+					series: [
+					  {
+						name: "内存使用量",
+						type: "bar",
+						itemStyle: {
+						  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{
+							  offset: 0,
+							  color: "#0182e8"
+							},
+							{
+							  offset: 1,
+							  color: "#021b4d"
+							}
+						  ]),
+						  barBorderRadius: 5
+						},
+						barWidth: "10px"
+						// data: [35, 50, 45, 22, 17, 60, 15, 10, 16, 80, 60, 90]
+					  }
+					]
+				};
+				//渲染图表
+				NodestoreMap.setOption(NodestoreMapOpt);
+				$.ajax({
+					// url: "data/node_CPU.json",
+					// dataType: "json"
+					url: "http://222.24.63.59:9068/k8s/cpu/usage/nodememory.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json"
+				}).done(function() {
+					$("#NodestoreMap").addClass("chart-done");
+				}).done(function(data) {
+					const xData = [];
+					const yData = [];
+					for(let i in data) {
+						xData.push(data[i].time);
+						yData.push(parseInt(data[i].memory_used));
+					}
+					NodestoreMap.setOption({
+						xAxis: {
+							data: xData
+						},
+						yAxis: {
+							min: Math.min.apply(null, yData) - 3,
+							max: Math.max.apply(null, yData) + 3,
+							interval: 5
+						  },
+						series: [{
+							data: yData
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+				/******************* 容器组CPU折线图---旧 ******************/
+				// //初始化echarts实例
+				// const ContainercpuMap = echarts.init(document.getElementById("ContainercpuMap"));
+				// const ContainercpuMapOpt = {
+				//     title:{
+				// 		text: 'CPU使用率',
+				// 		top: '21px',
+				// 		left: '5px',
+				// 		textStyle:{
+				// 		    fontSize:20,
+				// 			color:'#5dc2fe',
+				// 			fontWeight:'normal'
+				// 		}
+				// 	},
+				// 	xAxis: {
+				// 		type: 'category',
+				// 		boundaryGap: false,
+				// 		// data: ['10:20', '10:23', '10:26', '10:30', '10:34', '10:36', '10:38'],
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		},
+				// 		axisTick: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	yAxis: {
+				// 		type: 'value',
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	series: [{
+				// 		// data: [820, 932, 901, 934, 1290, 1330, 1320],
+				// 		type: 'line',
+				// 		areaStyle: {}
+				// 	}]
+				// };
+				// ContainercpuMap.setOption(ContainercpuMapOpt);
+				// $.ajax({
+				// 	// url: "data/node_CPU.json",
+				// 	// dataType: "json"
+				// 	url: "http://222.24.63.59:9068/k8s/cpu/usage_rate/podCpu.json",
+				// 	xhrFields: {
+				// 		withCredentials: true
+				// 	},
+				// 	dataType: "json"
+				// }).done(function() {
+				// 	$("#ContainercpuMap").addClass("chart-done");
+				// }).done(function(data) {
+				// 	const xData = [];
+				// 	const yData = [];
+				// 	for(let i in data) {
+				// 		xData.push(data[i].time);
+				// 		yData.push(data[i].cPU_used);
+				// 	}
+				// 	ContainercpuMap.setOption({
+				// 		xAxis: {
+				// 			data: xData
+				// 		},
+				// 		series: [{
+				// 			data: yData
+				// 		}]
+				// 	});
+				// }).fail(function(jqXHR) {
+				// 	console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				// });
+
+				/****************** 容器组CPU折线图---新 ********************/
+				//初始化echart实例
+				const ContainercpuMap = echarts.init(document.getElementById("ContainercpuMap"));
+				//配置项
+				const ContainercpuMapOpt = {
+					tooltip: {
+					  trigger: "axis",
+					  axisPointer: {
+						type: "cross",
+						crossStyle: {
+						  color: "white"
+						}
+					  }
+					},
+					grid:{
+					    x:50
+					},
+					textStyle: {
+					  color: "#a0a8b9"
+					},
+					legend: {
+					  data: ["CPU占比"],
+					  textStyle: {
+						color: "#929aad"
+					  },
+					  right: "8%",
+					  top: "0%"
+					},
+					xAxis: [
+					  {
+						type: "category",
+						name: "",
+						// data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+						axisPointer: {
+						  type: "shadow"
+						}
+					  }
+					],
+					yAxis: [
+					  {
+						type: "value",
+						name: "使用率(%)",
+						// min: 0,
+						// max: 100,
+						// interval: 10,
+						axisLabel: {
+						  formatter: "{value}"
+						}
+					  }
+					],
+					series: [
+					  {
+						name: "CPU占比",
+						type: "line",
+						itemStyle: {
+						  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{
+							  offset: 0,
+							  color: "#0182e8"
+							},
+							{
+							  offset: 1,
+							  color: "#021b4d"
+							}
+						  ]),
+						  barBorderRadius: 5
+						},
+						barWidth: "10px",
+						// data: [35, 50, 45, 22, 17, 60, 15, 10, 16, 80, 60, 90]
+					  }
+					]
+				};
+				//渲染图表
+				ContainercpuMap.setOption(ContainercpuMapOpt);
+				$.ajax({
+					// url: "data/node_CPU.json",
+					// dataType: "json"
+					url: "http://222.24.63.59:9068/k8s/cpu/usage_rate/podCpu.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json"
+				}).done(function() {
+					$("#ContainercpuMap").addClass("chart-done");
+				}).done(function(data) {
+					const xData = [];
+					const yData = [];
+					for(let i in data) {
+						xData.push(data[i].time);
+						yData.push(data[i].cPU_used);
+					}
+					ContainercpuMap.setOption({
+						xAxis: {
+							data: xData
+						},
+						yAxis: {
+							min: Math.min.apply(null, yData) - 0.0001,
+							max: Math.max.apply(null, yData) + 0.0001,
+							interval: 0.0003
+						},
+						series: [{
+							data: yData
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+				/******************* 容器组内存折线图---旧 ******************/
+				// //初始化echarts实例
+				// const ContainerstoreMap = echarts.init(document.getElementById("ContainerstoreMap"));
+				// const ContainerstoreMapOpt = {
+				//     title:{
+				// 		text: '内存使用量(Mi)',
+				// 		top: '21px',
+				// 		left: '5px',
+				// 		textStyle:{
+				// 		    fontSize:20,
+				// 			color:'#5dc2fe',
+				// 			fontWeight:'normal'
+				// 		}
+				// 	},
+				// 	xAxis: {
+				// 		type: 'category',
+				// 		boundaryGap: false,
+				// 		// data: ['10:20', '10:23', '10:26', '10:30', '10:34', '10:36', '10:38'],
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		},
+				// 		axisTick: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	yAxis: {
+				// 		type: 'value',
+				// 		axisLabel: {
+				// 		    color: '#f0f8ff'
+				// 		}
+				// 	},
+				// 	series: [{
+				// 		// data: [1530, 932, 1100, 934, 1290, 1330, 1320],
+				// 		type: 'line',
+				// 		areaStyle: {}
+				// 	}]
+				// };
+				// ContainerstoreMap.setOption(ContainerstoreMapOpt);
+				// $.ajax({
+				// 	// url: "data/node_CPU.json",
+				// 	// dataType: "json"
+				// 	url: "http://222.24.63.59:9068/k8s/cpu/usage/podmemory.json",
+				// 	xhrFields: {
+				// 		withCredentials: true
+				// 	},
+				// 	dataType: "json"
+				// }).done(function() {
+				// 	$("#ContainerstoreMap").addClass("chart-done");
+				// }).done(function(data) {
+				// 	const xData = [];
+				// 	const yData = [];
+				// 	for(let i in data) {
+				// 		xData.push(data[i].time);
+				// 		yData.push(data[i].memory_used);
+				// 	}
+				// 	ContainerstoreMap.setOption({
+				// 		xAxis: {
+				// 			data: xData
+				// 		},
+				// 		series: [{
+				// 			data: yData
+				// 		}]
+				// 	});
+				// }).fail(function(jqXHR) {
+				// 	console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				// });
+
+				/****************** 容器组内存折线图---新 ********************/
+				//初始化echart实例
+				const ContainerstoreMap = echarts.init(document.getElementById("ContainerstoreMap"));
+				//配置项
+				const ContainerstoreMapOpt = {
+					tooltip: {
+					  trigger: "axis",
+					  axisPointer: {
+						type: "cross",
+						crossStyle: {
+						  color: "white"
+						}
+					  }
+					},
+					grid:{
+					    x:30
+					},
+					textStyle: {
+					  color: "#a0a8b9"
+					},
+					legend: {
+					  data: ["内存使用量"],
+					  textStyle: {
+						color: "#929aad"
+					  },
+					  right: "8%",
+					  top: "0%"
+					},
+					xAxis: [
+					  {
+						type: "category",
+						name: "",
+						// data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+						axisPointer: {
+						  type: "shadow"
+						},
+						axisLabel: {
+						  formatter: "{value}"
+						}
+					  }
+					],
+					yAxis: [
+					  {
+						type: "value",
+						name: "使用量(Mi)",
+						min: 0,
+						max: 100,
+						interval: 10,
+						axisLabel: {
+						  formatter: "{value}"
+						}
+					  }
+					],
+					series: [
+					  {
+						name: "内存使用量",
+						type: "bar",
+						itemStyle: {
+						  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+							{
+							  offset: 0,
+							  color: "#0182e8"
+							},
+							{
+							  offset: 1,
+							  color: "#021b4d"
+							}
+						  ]),
+						  barBorderRadius: 5
+						},
+						barWidth: "10px",
+						// data: [35, 50, 45, 22, 17, 60, 15, 10, 16, 80, 60, 90]
+					  }
+					]
+				};
+				//渲染图表
+				ContainerstoreMap.setOption(ContainerstoreMapOpt);
+				$.ajax({
+					// url: "data/node_CPU.json",
+					// dataType: "json"
+					url: "http://222.24.63.59:9068/k8s/cpu/usage/podmemory.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json"
+				}).done(function() {
+					$("#ContainerstoreMap").addClass("chart-done");
+				}).done(function(data) {
+					const xData = [];
+					const yData = [];
+					for(let i in data) {
+						xData.push(data[i].time);
+						yData.push(parseInt(data[i].memory_used));
+					}
+					ContainerstoreMap.setOption({
+						xAxis: {
+							data: xData
+						},
+						yAxis: {
+							min: Math.min.apply(null, yData) - 1,
+							max: Math.max.apply(null, yData) + 1,
+							interval: 1
+						},
+						series: [{
+							data: yData
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+
+				/******************* 节点CPU资源状态饼状图 ******************/
+				//初始化echarts实例
+				const SourceMap_1 = echarts.init(document.getElementById("SourceMap_1"));
+				const SourceMap_1Opt = {
+				    title : {
+							text: 'CPU分配情况(核数)',
+							top: '200px',
+							x: 'center',
+							textStyle:{
+								fontSize:14,
+								color:'#5dc2fe',
+								fontWeight:'normal'
+							}
+					},
+				     tooltip: {
+							trigger: 'item',
+							formatter: "{a} <br/>{b}: {c} ({d}%)"
+					},
+					color:['#3C9ED8','#2B2B2B'],
+					series: [
+						{
+							name:'CPU占用率',
+							type:'pie',
+							selectedMode: 'single',
+							radius: ['70%', '75%'],
+
+							label: {
+								normal: {
+									position: 'inner'
+								}
+							},
+							labelLine: {
+								normal: {
+									show: false
+								}
+							}
+							// data:[
+							// 	{value:335, name:'请求值：'+ 335},
+							// 	{value:1548, name:'剩余值：'+ 1548}
+							// ]
+						},
+						{
+							type:'pie',
+
+							radius: ['0%', '5%'],
+							label: {
+								normal: {
+									position: 'inner'
+								}
+							},
+							data:[
+								{value:' ', name:' '}
+							]
+						}
+					]
+				};
+				SourceMap_1.setOption(SourceMap_1Opt);
+				$.ajax({
+					// url: "data/node_CPU.json",
+					// dataType: "json"
+					url: "http://222.24.63.59:9068/k8s/cpu/allocation.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json"
+				}).done(function() {
+					$("#SourceMap_1").addClass("chart-done");
+				}).done(function(data) {
+					const xData = data.request;
+					const yData = data.total;
+					SourceMap_1.setOption({
+						series: [{
+							data:[
+								{value:xData, name:'占用：'+ xData},
+								{value:yData, name:'总量：'+ yData}
+							]
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				/******************* 节点Memory资源状态饼状图 ******************/
+				//初始化echarts实例
+				const SourceMap_2 = echarts.init(document.getElementById("SourceMap_2"));
+				const SourceMap_2Opt = {
+				    title : {
+							text: '内存分配情况(Mi)',
+							top: '200px',
+							x: 'center',
+							textStyle:{
+								fontSize:14,
+								color:'#5dc2fe',
+								fontWeight:'normal'
+							}
+					},
+				     tooltip: {
+							trigger: 'item',
+							formatter: "{a} <br/>{b}: {c} ({d}%)"
+					},
+					color:['#3C9ED8','#2B2B2B'],
+					series: [
+						{
+							name:'CPU占用率',
+							type:'pie',
+							selectedMode: 'single',
+							radius: ['70%', '75%'],
+
+							label: {
+								normal: {
+									position: 'inner'
+								}
+							},
+							labelLine: {
+								normal: {
+									show: false
+								}
+							}
+							// data:[
+							// 	{value:335, name:'请求值：'+ 335},
+							// 	{value:1548, name:'剩余值：'+ 1548}
+							// ]
+						},
+						{
+							type:'pie',
+
+							radius: ['0%', '5%'],
+							label: {
+								normal: {
+									position: 'inner'
+								}
+							},
+							data:[
+								{value:' ', name:' '}
+							]
+						}
+					]
+				};
+				SourceMap_2.setOption(SourceMap_2Opt);
+				$.ajax({
+					// url: "data/node_CPU.json",
+					// dataType: "json"
+					url: "http://222.24.63.59:9068/k8s/memory/allocation.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json"
+				}).done(function() {
+					$("#SourceMap_2").addClass("chart-done");
+				}).done(function(data) {
+					const xData = data.request;
+					const yData = data.total;
+					SourceMap_2.setOption({
+						series: [{
+							data:[
+								{value:xData, name:'占用：'+ xData},
+								{value:yData, name:'总量：'+ yData}
+							]
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				/******************* 节点Pods资源状态饼状图 ******************/
+				//初始化echarts实例
+				const SourceMap_3 = echarts.init(document.getElementById("SourceMap_3"));
+				const SourceMap_3Opt = {
+				    title : {
+							text: '集群分配情况',
+							top: '200px',
+							x: 'center',
+							textStyle:{
+								fontSize:14,
+								color:'#5dc2fe',
+								fontWeight:'normal'
+							}
+					},
+				     tooltip: {
+							trigger: 'item',
+							formatter: "{a} <br/>{b}: {c} ({d}%)"
+					},
+					color:['#3C9ED8','#2B2B2B'],
+					series: [
+						{
+							name:'CPU占用率',
+							type:'pie',
+							selectedMode: 'single',
+							radius: ['70%', '75%'],
+
+							label: {
+								normal: {
+									position: 'inner'
+								}
+							},
+							labelLine: {
+								normal: {
+									show: false
+								}
+							}
+							// data:[
+							// 	{value:335, name:'请求值：'+ 335},
+							// 	{value:1548, name:'剩余值：'+ 1548}
+							// ]
+						},
+						{
+							type:'pie',
+
+							radius: ['0%', '5%'],
+							label: {
+								normal: {
+									position: 'inner'
+								}
+							},
+							data:[
+								{value:' ', name:' '}
+							]
+						}
+					]
+				};
+				SourceMap_3.setOption(SourceMap_3Opt);
+				$.ajax({
+					// url: "data/node_CPU.json",
+					// dataType: "json"
+					url: "http://222.24.63.59:9068/k8s/cpu/usage_rate/pods_allocation.json",
+					xhrFields: {
+						withCredentials: true
+					},
+					dataType: "json"
+				}).done(function() {
+					$("#SourceMap_3").addClass("chart-done");
+				}).done(function(data) {
+					const xData = data.allocation;
+					const yData = data.total;
+					SourceMap_3.setOption({
+						series: [{
+							data:[
+								{value:xData, name:'占用：'+ xData},
+								{value:yData, name:'总量：'+ yData}
+							]
+						}]
+					});
+				}).fail(function(jqXHR) {
+					console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
+				});
+
+				/********** 浏览器窗口改变时，重置报表大小 ****************/
+				window.onresize = function() {
+					NodecpuMap.resize();
+					NodestoreMap.resize();
+					ContainercpuMap.resize();
+					ContainerstoreMap.resize();
+					flyMap.resize();
+				}
+			});
+		</script>
+		<script type="text/javascript">
+			var speed = 50;
+			Nodedemo2.innerHTML = Nodedemo1.innerHTML;
+			console.log(Nodedemo2.offsetTop - Nodedemo.scrollTop);
+			function Marquee1() {
+				if (Nodedemo2.offsetTop - Nodedemo.scrollTop <= 106) {
+					Nodedemo.scrollTop -= Nodedemo1.offsetHeight;
+				} else {
+					Nodedemo.scrollTop++;
+				}
+			}
+			var MyMar1 = setInterval(Marquee1, speed);
+
+			Nodedemo.onmouseover = function() {
+				clearInterval(MyMar1);
+			};
+
+			Nodedemo.onmouseout = function() {
+				MyMar1 = setInterval(Marquee1, speed);
+			}
+		</script>
+		<script type="text/javascript">
+			var speed = 50;
+			RQdemo2.innerHTML = RQdemo1.innerHTML;
+			console.log(RQdemo2.offsetTop - RQdemo.scrollTop);
+			function Marquee2() {
+				if (RQdemo2.offsetTop - RQdemo.scrollTop <= 106) {
+					RQdemo.scrollTop -= RQdemo1.offsetHeight;
+				} else {
+					RQdemo.scrollTop++;
+				}
+			}
+			var MyMar2 = setInterval(Marquee2, speed);
+
+			RQdemo.onmouseover = function() {
+				clearInterval(MyMar2);
+			};
+
+			RQdemo.onmouseout = function() {
+				MyMar2 = setInterval(Marquee2, speed);
+			}
+		</script>
+		<!--自动刷新-->
+		<script language="JavaScript">
+			setTimeout(function(){location.reload()},30000); //指定1秒刷新一次
+		</script>
+
+		<!--<script language="javascript" type="text/javascript">-->
+			<!--// 以下方式直接跳转-->
+			<!--// window.location.href='hello.html';-->
+			<!--// 以下方式定时跳转-->
+			<!--setTimeout("javascript:location.href='../openstack/index.html'", 30000);-->
+		<!--</script>-->
+	</body>
+</html>
